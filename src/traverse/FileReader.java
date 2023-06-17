@@ -13,6 +13,10 @@ public class FileReader {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 _File file = new _File(child);
+                FileContentVerifier verifier = new FileContentVerifier(child);
+                verifier.verify();
+                file.setDangerLevel(verifier.calculateDangerLevel());
+                file.setVerifierMessage(verifier.createMessage());
                 data.add(file.getFileData());
             }
         }

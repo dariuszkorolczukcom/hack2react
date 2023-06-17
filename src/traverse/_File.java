@@ -10,6 +10,8 @@ public class _File {
     private final Path path;
     private final String created;
     private final String modified;
+    private DangerLevel dangerLevel;
+    private String verifierMessage;
 
     _File(File file) throws IOException {
         this.path = Path.of(file.getPath());
@@ -19,6 +21,14 @@ public class _File {
     }
 
     public FileDataDto getFileData() {
-        return new FileDataDto(this.path.toString(), this.created, this.modified);
+        return new FileDataDto(this.path.toString(), this.created, this.modified, this.dangerLevel, this.verifierMessage);
+    }
+
+    public void setDangerLevel(DangerLevel dangerLevel) {
+        this.dangerLevel = dangerLevel;
+    }
+
+    public void setVerifierMessage(String verifierMessage) {
+        this.verifierMessage = verifierMessage;
     }
 }
