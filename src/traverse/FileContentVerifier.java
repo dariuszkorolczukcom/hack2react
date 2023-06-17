@@ -1,9 +1,9 @@
 package traverse;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
+import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -39,7 +39,16 @@ public class FileContentVerifier {
     }
 
     private List<FileScanOutput> scanDocxFile() {
-        return List.of();
+        try (FileInputStream fis = new FileInputStream(file);
+             XWPFDocument document = new XWPFDocument(fis);
+             XWPFWordExtractor extractor = new XWPFWordExtractor(document)) {
+
+            return List.of(scanString(extractor.getText()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return List.of();
+        }
     }
 
     private List<FileScanOutput> scanXlsxFile() {
@@ -124,25 +133,29 @@ public class FileContentVerifier {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         while ((line = reader.readLine()) != null) {
-            FileScanOutput output = new FileScanOutput();
-            if (hasPesel(line)) {
-                output.setHasPesel(true);
-            }
-            if (hasPostCode(line)) {
-                output.setHasPostCode(true);
-            }
-            if (hasName(line)) {
-                output.setHasName(true);
-            }
-            if (hasPhone(line)) {
-                output.setHasPhone(true);
-            }
-            if (hasEmail(line)) {
-                output.setHasEmail(true);
-            }
-            outputs.add(output);
+            outputs.add(scanString(line));
         }
         return outputs;
+    }
+
+    private FileScanOutput scanString(String line) {
+        FileScanOutput output = new FileScanOutput();
+        if (hasPesel(line)) {
+            output.setHasPesel(true);
+        }
+        if (hasPostCode(line)) {
+            output.setHasPostCode(true);
+        }
+        if (hasName(line)) {
+            output.setHasName(true);
+        }
+        if (hasPhone(line)) {
+            output.setHasPhone(true);
+        }
+        if (hasEmail(line)) {
+            output.setHasEmail(true);
+        }
+        return output;
     }
 
     private boolean hasEmail(String text) {
