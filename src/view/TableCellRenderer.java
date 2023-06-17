@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 public class TableCellRenderer extends DefaultTableCellRenderer {
-	TableCellRenderer(){
+	public TableCellRenderer(){
 		super();
 	}
 	

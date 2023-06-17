@@ -14,7 +14,7 @@ public class Table extends AbstractTableModel {
             "danger rate",
             "message"};
 
-    Table(List<TableDataDto> data) {
+    public Table(List<TableDataDto> data) {
         this.data = data;
     }
 
