@@ -11,6 +11,7 @@ public class Table extends AbstractTableModel {
             "creation time",
             "last action time",
             "danger level",
+            "danger rate",
             "message"};
 
     Table(List<TableDataDto> data) {
@@ -35,7 +36,8 @@ public class Table extends AbstractTableModel {
             case 1 -> dto.created();
             case 2 -> dto.modified();
             case 3 -> dto.dangerLevel();
-            case 4 -> dto.dangerMessage();
+            case 4 -> dto.dangerRate();
+            case 5 -> dto.dangerMessage();
             default -> null;
         };
     }

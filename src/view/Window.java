@@ -3,7 +3,7 @@ package view;
 import csv.creator.CsvCreator;
 import csv.creator.CsvSaveDto;
 import traverse.FileDataDto;
-import traverse.FileTraverser;
+import traverse.FileTraverse;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,15 +15,17 @@ import static traverse.DataParserUtil.provideCsvData;
 import static traverse.DataParserUtil.provideTableData;
 
 public class Window {
-    FileTraverser fr = new FileTraverser();
+    boolean shouldProcessSubFolders = false;
+    String scanPath = "./resources";
+    String csvPath = "./output.csv";
+    FileTraverse fr = new FileTraverse(shouldProcessSubFolders);
 
     public void run() {
-        String scanPath = "./resources";
-        String csvPath = "./output.csv";
-        JFrame f = new JFrame();//creating instance of JFrame
 
-        JButton b = new JButton("Sprawdz obecny folder");//creating instance of JButton
-        b.setBounds(130, 100, 100, 40);//x axis, y axis, width, height
+        JFrame f = new JFrame();
+
+        JButton b = new JButton("Sprawdź obecny folder");
+        b.setBounds(130, 100, 100, 40);
 
         b.addActionListener(e -> {
             try {
@@ -51,16 +53,15 @@ public class Window {
 
                 contentPane.add(scrollPane);
                 scrollPane.setViewportView(table);
-                f.setVisible(true);//making the frame visible
+                f.setVisible(true);
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         });
 
-        f.add(b);//adding button in JFrame
-        f.setSize(800, 500);//400 width and 500 height
-        f.setLayout(null);//using no layout managers
-        f.setVisible(true);//making the frame visible
+        f.add(b);
+        f.setSize(800, 500);
+        f.setLayout(null);
+        f.setVisible(true);
     }
 }
