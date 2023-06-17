@@ -2,8 +2,10 @@ package traverse;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class FileTraverse {
 
@@ -14,36 +16,25 @@ public class FileTraverse {
     }
 
     public List<FileDataDto> traverse(String path) throws IOException {
-        File dir = new File(path);
-        List<FileDataDto> data = new ArrayList<>();
-        if (dir.isDirectory()) {
-            data = processFiles(dir.listFiles());
-        } else if (dir.isFile()) {
-            data.add(processSingleFile(dir));
+        try (Stream<Path> paths = Files.walk(Path.of(path), processSubDirectories ? Integer.MAX_VALUE : 1)) {
+            return paths
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .map(this::processSingleFile)
+                    .toList();
         }
-        return data;
     }
 
-    private List<FileDataDto> processFiles(File[] files) throws IOException {
-        List<FileDataDto> fileList = new ArrayList<>();
-        for (File file : files) {
-            if (file.isDirectory() && processSubDirectories) {
-                fileList.addAll(processFiles(file.listFiles()));
-            } else if (file.isFile()) {
-                fileList.add(processSingleFile(file));
-            }
-        }
-        return fileList;
-    }
-
-    private FileDataDto processSingleFile(File file) throws IOException {
+    private FileDataDto processSingleFile(File file) {
         FileDto fileDto = new FileDto(file);
         FileContentVerifier verifier = new FileContentVerifier(file);
-        verifier.verify();
-        int dangerLevel = verifier.calculateDangerRate();
-        fileDto.setDangerRate(dangerLevel);
-        fileDto.setDangerLevel(verifier.calculateDangerLevel(dangerLevel));
-        fileDto.setVerifierMessage(verifier.createMessage());
+        try {
+            verifier.verify();
+            fileDto.setDangerRateAndLevel(verifier);
+            fileDto.setVerifierMessage(verifier.createMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return fileDto.getFileData();
     }
 }

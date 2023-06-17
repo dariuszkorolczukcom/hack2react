@@ -8,32 +8,33 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileDto {
     private final Path path;
-    private final String created;
-    private final String modified;
+    private String created;
+    private String modified;
     private DangerLevel dangerLevel;
     private int dangerRate;
     private String verifierMessage;
 
-    public FileDto(File file) throws IOException {
+    public FileDto(File file) {
         this.path = Path.of(file.getPath());
-        BasicFileAttributes attr = Files.readAttributes(this.path, BasicFileAttributes.class);
-        this.created = attr.creationTime().toString();
-        this.modified = attr.lastAccessTime().toString();
+        try {
+            BasicFileAttributes attr = Files.readAttributes(this.path, BasicFileAttributes.class);
+            this.created = attr.creationTime().toString();
+            this.modified = attr.lastAccessTime().toString();
+        } catch (IOException e) {
+        }
     }
+
 
     public FileDataDto getFileData() {
         return new FileDataDto(this.path.toString(), this.created, this.modified, this.dangerLevel, this.dangerRate, this.verifierMessage);
     }
 
-    public void setDangerLevel(DangerLevel dangerLevel) {
-        this.dangerLevel = dangerLevel;
-    }
-
-    public void setDangerRate(int dangerRate) {
-        this.dangerRate = dangerRate;
-    }
-
     public void setVerifierMessage(String verifierMessage) {
         this.verifierMessage = verifierMessage;
+    }
+
+    public void setDangerRateAndLevel(FileContentVerifier verifier) {
+        this.dangerRate = verifier.calculateDangerRate();
+        this.dangerLevel = verifier.calculateDangerLevel(this.dangerRate);
     }
 }

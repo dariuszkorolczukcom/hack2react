@@ -1,5 +1,7 @@
 package csv.creator;
 
+import traverse.FileDataDto;
+
 public class CsvSaveDto {
 
     public final static String CSV_HEADER = "FilePath,CreatedTime,LastModifiedTime,DangerLevel,DangerMessage\n";
@@ -17,6 +19,15 @@ public class CsvSaveDto {
         this.dangerLevel = dangerLevel;
         this.dangerRate = dangerRate;
         this.message = message;
+    }
+
+    public CsvSaveDto(FileDataDto dto) {
+        this.path = dto.path();
+        this.created = dto.created();
+        this.modified = dto.modified();
+        this.dangerLevel = dto.dangerLevel().toString();
+        this.dangerRate = dto.dangerRate();
+        this.message = dto.verifierMessage();
     }
 
     public String toCsv() {

@@ -1,19 +1,12 @@
 package traverse;
 
-import csv.creator.CsvSaveDto;
-
 import java.util.List;
+import java.util.function.Function;
 
 public class DataParserUtil {
-    public static List<CsvSaveDto> provideCsvData(List<FileDataDto> fileData) {
+    public static <T> List<T> convertFileDataTo(List<FileDataDto> fileData, Function<FileDataDto, T> converter) {
         return fileData.stream()
-                .map(FileDataDto::toCsvSaveDto)
-                .toList();
-    }
-
-    public static List<TableDataDto> provideTableData(List<FileDataDto> fileData) {
-        return fileData.stream()
-                .map(FileDataDto::toTableDataDto)
+                .map(converter)
                 .toList();
     }
 }

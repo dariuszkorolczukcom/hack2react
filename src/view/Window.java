@@ -2,19 +2,17 @@ package view;
 
 import csv.creator.CsvCreator;
 import csv.creator.CsvSaveDto;
+import traverse.DataParserUtil;
 import traverse.FileDataDto;
 import traverse.FileTraverse;
+import traverse.TableDataDto;
 
-import java.io.*;
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableModel;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import static traverse.DataParserUtil.provideCsvData;
-import static traverse.DataParserUtil.provideTableData;
 
 public class Window {
     boolean shouldProcessSubFolders = false;
@@ -42,13 +40,14 @@ public class Window {
             try {
                 List<FileDataDto> fileData = fr.traverse(scanPath);
 
-                List<CsvSaveDto> csvData = provideCsvData(fileData);
+                List<CsvSaveDto> csvData = DataParserUtil.convertFileDataTo(fileData, CsvSaveDto::new);
+                List<TableDataDto> tableData = DataParserUtil.convertFileDataTo(fileData, TableDataDto::new);
 
                 CsvCreator csvCreator = new CsvCreator(csvPath, csvData);
                 csvCreator.createCsv();
 
-                TableModel tableData = new Table(provideTableData(fileData));
-                JTable table = new JTable(tableData);
+                TableModel tableModel = new Table(tableData);
+                JTable table = new JTable(tableModel);
                 
                 table.setDefaultRenderer(Object.class, new TableCellRenderer());
                 
@@ -79,7 +78,6 @@ public class Window {
                     this.scanPath = file.getPath();
                     pathField.setText(this.scanPath);
                     f.setVisible(true);
-                } else {
                 }
         });
         
