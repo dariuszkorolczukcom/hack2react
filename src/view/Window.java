@@ -36,7 +36,9 @@ public class Window {
 
                 TableModel tableData = new Table(provideTableData(fileData));
                 JTable table = new JTable(tableData);
-
+                
+                table.setDefaultRenderer(Object.class, new TableCellRenderer());
+                
                 JScrollPane scrollPane = new JScrollPane(table);
                 scrollPane.setBounds(26, 46, 752, 131);
 
