@@ -39,4 +39,9 @@ public class Table extends AbstractTableModel {
             default -> null;
         };
     }
+
+    @Override
+    public String getColumnName(int columnIndex) {
+        return columnNames[columnIndex];
+    }
 }

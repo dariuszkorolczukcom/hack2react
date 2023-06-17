@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class FileContentVerifier {
 
@@ -51,14 +54,14 @@ public class FileContentVerifier {
     }
 
     public String createMessage() {
-        String message = "";
+        List<String> message = new ArrayList<>();
         if (fileScanOutput.hasPostCode()) {
-            message += " zawiera kod pocztowy ";
+            message.add("kod pocztowy");
         }
         if (fileScanOutput.hasPesel()) {
-            message += " zawiera pesel ";
+            message.add("pesel");
         }
-        return message;
+        return message.stream().collect(Collectors.joining("|"));
     }
 
     public FileScanOutput scanTextFile() throws IOException {
