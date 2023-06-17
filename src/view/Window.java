@@ -5,6 +5,8 @@ import csv.creator.CsvSaveDto;
 import traverse.FileDataDto;
 import traverse.FileTraverse;
 
+import java.io.*;
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableModel;
@@ -23,11 +25,20 @@ public class Window {
     public void run() {
 
         JFrame f = new JFrame();
-
-        JButton b = new JButton("Sprawdź obecny folder");
-        b.setBounds(130, 100, 100, 40);
-
-        b.addActionListener(e -> {
+        
+        JLabel pathField = new JLabel("nothing entered");
+        pathField.setBounds(130, 50, 500, 40);
+        
+        JButton searchButton = new JButton("Sprawdź wybrany folder");
+        searchButton.setBounds(130, 100, 200, 40);
+        
+        JButton chooseButton = new JButton("Wybierz folder");
+        chooseButton.setBounds(360, 100, 200, 40);
+        
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        searchButton.addActionListener(e -> {
             try {
                 List<FileDataDto> fileData = fr.traverse(scanPath);
 
@@ -59,7 +70,26 @@ public class Window {
             }
         });
 
-        f.add(b);
+        chooseButton.addActionListener(e -> {
+                int returnVal = fc.showOpenDialog(f);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fc.getSelectedFile();
+                    //This is where a real application would open the file.
+                    this.scanPath = file.getPath();
+                    pathField.setText(this.scanPath);
+                    f.setVisible(true);
+                } else {
+                }
+        });
+        
+        JPanel buttonPanel = new JPanel(); //use FlowLayout
+        buttonPanel.add(searchButton);
+        buttonPanel.add(chooseButton);
+
+        f.add(pathField);
+        f.add(searchButton);
+        f.add(chooseButton);
         f.setSize(800, 500);
         f.setLayout(null);
         f.setVisible(true);
