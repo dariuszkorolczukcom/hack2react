@@ -3,7 +3,7 @@ package view;
 import csv.creator.CsvCreator;
 import csv.creator.CsvSaveDto;
 import traverse.FileDataDto;
-import traverse.FileReader;
+import traverse.FileTraverser;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,10 +15,10 @@ import static traverse.DataParserUtil.provideCsvData;
 import static traverse.DataParserUtil.provideTableData;
 
 public class Window {
-    FileReader fr = new FileReader();
+    FileTraverser fr = new FileTraverser();
 
     public void run() {
-        String scanPath = "./";
+        String scanPath = "./resources";
         String csvPath = "./output.csv";
         JFrame f = new JFrame();//creating instance of JFrame
 
@@ -38,7 +38,7 @@ public class Window {
                 JTable table = new JTable(tableData);
 
                 JScrollPane scrollPane = new JScrollPane(table);
-                scrollPane.setBounds(26, 46, 352, 131);
+                scrollPane.setBounds(26, 46, 752, 131);
 
                 table.setFillsViewportHeight(true);
 
@@ -57,7 +57,7 @@ public class Window {
         });
 
         f.add(b);//adding button in JFrame
-        f.setSize(400, 500);//400 width and 500 height
+        f.setSize(800, 500);//400 width and 500 height
         f.setLayout(null);//using no layout managers
         f.setVisible(true);//making the frame visible
     }

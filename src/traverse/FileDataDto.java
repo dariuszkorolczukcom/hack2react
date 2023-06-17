@@ -18,10 +18,10 @@ public class FileDataDto {
     }
 
     public CsvSaveDto toCsvSaveDto() {
-        return new CsvSaveDto(path, created, modified);
+        return new CsvSaveDto(path, created, modified, dangerLevel.toString(), verifierMessage);
     }
 
     public TableDataDto toTableDataDto() {
-        return new TableDataDto(path, created, modified);
+        return new TableDataDto(path, created, modified, dangerLevel.toString(), verifierMessage);
     }
 }

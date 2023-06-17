@@ -6,10 +6,12 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class Table extends AbstractTableModel {
+    private final List<TableDataDto> data;
     String[] columnNames = {"file path",
             "creation time",
-            "last action time"};
-    private final List<TableDataDto> data;
+            "last action time",
+            "danger level",
+            "message"};
 
     Table(List<TableDataDto> data) {
         this.data = data;
@@ -32,6 +34,8 @@ public class Table extends AbstractTableModel {
             case 0 -> dto.path();
             case 1 -> dto.created();
             case 2 -> dto.modified();
+            case 3 -> dto.dangerLevel();
+            case 4 -> dto.dangerMessage();
             default -> null;
         };
     }
