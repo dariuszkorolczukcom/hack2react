@@ -9,7 +9,7 @@ public class Table extends AbstractTableModel {
     String[] columnNames = {"file path",
             "creation time",
             "last action time"};
-    private List<TableDataDto> data;
+    private final List<TableDataDto> data;
 
     Table(List<TableDataDto> data) {
         this.data = data;
@@ -28,15 +28,11 @@ public class Table extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         TableDataDto dto = data.get(rowIndex);
-        switch (columnIndex) {
-            case 0:
-                return dto.getPath();
-            case 1:
-                return dto.getCreated();
-            case 2:
-                return dto.getModified();
-            default:
-                return null;
-        }
+        return switch (columnIndex) {
+            case 0 -> dto.path();
+            case 1 -> dto.created();
+            case 2 -> dto.modified();
+            default -> null;
+        };
     }
 }

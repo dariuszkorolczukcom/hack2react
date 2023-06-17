@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader {
-    public List<TableDataDto> traverse() throws IOException {
-        File dir = new File("./");
+    public List<FileDataDto> traverse(String path) throws IOException {
+        File dir = new File(path);
         File[] directoryListing = dir.listFiles();
-        List<TableDataDto> data = new ArrayList<>();
+        List<FileDataDto> data = new ArrayList<>();
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 _File file = new _File(child);
-                data.add(file.getTableData());
+                data.add(file.getFileData());
             }
         }
         return data;
