@@ -1,16 +1,15 @@
 package view.slider;
 
-import javax.swing.JLabel;
-import javax.swing.JSlider;
+import javax.swing.*;
 
 public class Slider extends JSlider {
-	
-	String name;
-	JLabel yellowSliderLabel;
-	SliderValue value;
+
+	private final String name;
+	private final JLabel yellowSliderLabel;
+	private final SliderValue value;
 	
 	public Slider(String name, SliderValue value) {
-		super(JSlider.HORIZONTAL, 0, 20, 10);
+		super(SwingConstants.HORIZONTAL, 0, 20, 10);
 		this.name = name;
 		this.value = value;
 	    this.yellowSliderLabel = new JLabel(name);

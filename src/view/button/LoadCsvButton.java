@@ -1,14 +1,14 @@
 package view.button;
 
-import javax.swing.JFrame;
-
 import view.FilePath;
+
+import javax.swing.*;
 
 
 public class LoadCsvButton extends Button {
-	
-	FilePath scanPath;
-    String csvPath;
+
+	private FilePath scanPath;
+    private String csvPath;
     
 	public LoadCsvButton(JFrame f, String text) {
 		super(f, text);

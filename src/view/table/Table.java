@@ -7,7 +7,8 @@ import java.util.List;
 
 public class Table extends AbstractTableModel {
     private final List<TableDataDto> data;
-    String[] columnNames = {"file name",
+    private final String[] columnNames = {
+            "file name",
             "creation time",
             "last action time",
             "danger level",

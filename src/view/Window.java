@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.*;
-
 import view.button.BackButton;
 import view.button.ChooseButton;
 import view.button.LoadCsvButton;
@@ -9,13 +7,15 @@ import view.button.SearchButton;
 import view.slider.Slider;
 import view.slider.SliderValue;
 
+import javax.swing.*;
+
 public class Window {
 	
 	FilePath scanPath = new FilePath("C:\\Users\\GAMING\\www\\hack2react\\resources");
     String csvPath = "./output.csv";
-    SliderValue redValue = new SliderValue(10);
-    SliderValue yellowvalue = new SliderValue(10);
-    SliderValue blueValue = new SliderValue(10);
+    SliderValue redValue = new SliderValue(SwingConstants.HORIZONTAL);
+    SliderValue yellowValue = new SliderValue(SwingConstants.HORIZONTAL);
+    SliderValue blueValue = new SliderValue(SwingConstants.HORIZONTAL);
     public void run() {
 
         JFrame f = new JFrame();
@@ -25,7 +25,7 @@ public class Window {
         JLabel pathField = new JLabel("nothing entered");
         pathField.setBounds(130, 50, 500, 40);
 
-        Slider yellowSlider = new Slider("Nazwiska", yellowvalue);
+        Slider yellowSlider = new Slider("Nazwiska", yellowValue);
         yellowSlider.initiate(200);
 
         Slider redSlider = new Slider("Pesele", redValue);

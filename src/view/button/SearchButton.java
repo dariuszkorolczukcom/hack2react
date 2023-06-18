@@ -1,16 +1,5 @@
 package view.button;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableModel;
-
 import csv.creator.CsvCreator;
 import csv.creator.CsvSaveDto;
 import traverse.DataParserUtil;
@@ -21,10 +10,16 @@ import view.FilePath;
 import view.table.Table;
 import view.table.TableCellRenderer;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableModel;
+import java.io.IOException;
+import java.util.List;
+
 public class SearchButton extends Button {
 	
-	FilePath scanPath;
-    String csvPath;
+	private final FilePath scanPath;
+    private final String csvPath;
     
 	public SearchButton(JFrame f, String text, FilePath scanPath, String csvPath) {
 		super(f, text);
