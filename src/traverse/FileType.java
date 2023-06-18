@@ -10,6 +10,7 @@ public enum FileType {
     TEXT("txt"),
     XLSX("xlsx"),
     DOCX("docx"),
+    CSV("csv"),
     UNKNOWN("");
 
     private static final Map<String, FileType> BY_EXTENSION;
