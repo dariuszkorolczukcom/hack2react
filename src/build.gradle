@@ -9,19 +9,30 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-}s
+}
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
+sourceSets {
+	src {
+		java {
+			srcDirs '.'
+		}
+    }
+ }
+ 
 dependencies {
-	// https://mvnrepository.com/artifact/io.github.vincenzopalazzo/material-ui-swing
-	implementation group: 'io.github.vincenzopalazzo', name: 'material-ui-swing', version: '1.1.4'
+	// https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
+	implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.28'
+	
+	// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+	implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.20.0'
+
 	
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'

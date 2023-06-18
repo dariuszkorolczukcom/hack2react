@@ -1,6 +1,7 @@
 package traverse;
 
 public record TableDataDto(
+		String name,
         String path,
         String created,
         String modified,
@@ -8,6 +9,6 @@ public record TableDataDto(
         Integer dangerRate,
         String dangerMessage) {
     public TableDataDto(FileDataDto dto) {
-        this(dto.path(), dto.created(), dto.modified(), dto.dangerLevel().toString(), dto.dangerRate(), dto.verifierMessage());
+        this(dto.name(), dto.path(), dto.created(), dto.modified(), dto.dangerLevel().toString(), dto.dangerRate(), dto.verifierMessage());
     }
 }

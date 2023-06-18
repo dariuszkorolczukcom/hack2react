@@ -49,6 +49,11 @@ public class SearchButton extends Button {
                 JTable table = new JTable(tableModel);
                 
                 table.setDefaultRenderer(Object.class, new TableCellRenderer());
+                table.getColumnModel().getColumn(0).setPreferredWidth(220);
+                table.getColumnModel().getColumn(1).setPreferredWidth(120);
+                table.getColumnModel().getColumn(2).setPreferredWidth(100);
+                table.getColumnModel().getColumn(3).setPreferredWidth(40);
+                table.getColumnModel().getColumn(4).setPreferredWidth(20);
                 
                 JScrollPane scrollPane = new JScrollPane(table);
                 scrollPane.setBounds(30, 30, 720, 300);

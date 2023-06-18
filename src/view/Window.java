@@ -9,7 +9,7 @@ import view.button.SearchButton;
 
 public class Window {
 	
-	FilePath scanPath = new FilePath("C:\\Users\\GAMING\\hack2react\\hack2react\\resources");
+	FilePath scanPath = new FilePath("C:\\Users\\GAMING\\www\\hack2react\\resources");
     String csvPath = "./output.csv";
     Integer redValue;
     Integer yellowValue;

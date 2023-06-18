@@ -8,6 +8,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileDto {
     private final Path path;
+    private final String name;
     private String created;
     private String modified;
     private DangerLevel dangerLevel;
@@ -16,6 +17,7 @@ public class FileDto {
 
     public FileDto(File file) {
         this.path = Path.of(file.getPath());
+        this.name = file.getName();
         try {
             BasicFileAttributes attr = Files.readAttributes(this.path, BasicFileAttributes.class);
             this.created = attr.creationTime().toString();
@@ -26,7 +28,7 @@ public class FileDto {
 
 
     public FileDataDto getFileData() {
-        return new FileDataDto(this.path.toString(), this.created, this.modified, this.dangerLevel, this.dangerRate, this.verifierMessage);
+        return new FileDataDto(this.name, this.path.toString(), this.created, this.modified, this.dangerLevel, this.dangerRate, this.verifierMessage);
     }
 
     public void setVerifierMessage(String verifierMessage) {

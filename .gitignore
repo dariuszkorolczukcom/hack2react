@@ -31,3 +31,8 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
+
+.settings/
+src/bin/
+src/output.csv
+src/.settings

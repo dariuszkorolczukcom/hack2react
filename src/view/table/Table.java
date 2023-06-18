@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Table extends AbstractTableModel {
     private final List<TableDataDto> data;
-    String[] columnNames = {"file path",
+    String[] columnNames = {"file name",
             "creation time",
             "last action time",
             "danger level",
@@ -32,7 +32,7 @@ public class Table extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         TableDataDto dto = data.get(rowIndex);
         return switch (columnIndex) {
-            case 0 -> dto.path();
+            case 0 -> dto.name();
             case 1 -> dto.created();
             case 2 -> dto.modified();
             case 3 -> dto.dangerLevel();
