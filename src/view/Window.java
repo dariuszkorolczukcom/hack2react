@@ -13,9 +13,9 @@ public class Window {
 	
 	FilePath scanPath = new FilePath("C:\\Users\\GAMING\\www\\hack2react\\resources");
     String csvPath = "./output.csv";
-    SliderValue redValue;
-    SliderValue yellowvalue;
-    SliderValue blueValue;
+    SliderValue redValue = new SliderValue(10);
+    SliderValue yellowvalue = new SliderValue(10);
+    SliderValue blueValue = new SliderValue(10);
     public void run() {
 
         JFrame f = new JFrame();
@@ -25,14 +25,14 @@ public class Window {
         JLabel pathField = new JLabel("nothing entered");
         pathField.setBounds(130, 50, 500, 40);
 
-        Slider yellowSlider = new Slider("Pesele");
-        yellowSlider.initiate(yellowvalue, 200);
+        Slider yellowSlider = new Slider("Nazwiska", yellowvalue);
+        yellowSlider.initiate(200);
 
-        Slider redSlider = new Slider("Pesele");
-        redSlider.initiate(redValue, 250);
+        Slider redSlider = new Slider("Pesele", redValue);
+        redSlider.initiate(250);
 
-        Slider blueSlider = new Slider("Adresy");
-        blueSlider.initiate(blueValue, 300);
+        Slider blueSlider = new Slider("Adresy", blueValue);
+        blueSlider.initiate(300);
         
         SearchButton searchButton = new SearchButton(f, "Sprawdź wybrany folder", scanPath, csvPath);
         searchButton.setBounds(30, 100, 200, 40);
@@ -53,7 +53,7 @@ public class Window {
         JPanel buttonPanel = new JPanel(); //use FlowLayout
         buttonPanel.add(searchButton);
         buttonPanel.add(chooseButton);
-
+        
         f.add(pathField);
         f.add(searchButton);
         f.add(chooseButton);
@@ -63,7 +63,7 @@ public class Window {
         f.add(yellowSlider);
         f.add(blueSlider.getLabel());
         f.add(blueSlider);
-//        f.add(loadCsv);
+        f.add(loadCsv);
         f.setSize(800, 500);
         f.setLayout(null);
         f.setVisible(true);

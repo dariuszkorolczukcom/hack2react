@@ -7,23 +7,24 @@ public class Slider extends JSlider {
 	
 	String name;
 	JLabel yellowSliderLabel;
+	SliderValue value;
 	
-	public Slider(String name) {
+	public Slider(String name, SliderValue value) {
 		super(JSlider.HORIZONTAL, 0, 20, 10);
 		this.name = name;
+		this.value = value;
 	    this.yellowSliderLabel = new JLabel(name);
 	}
 	
-	public void initiate(SliderValue value, int position) {
+	public void initiate(int position) {
 	    yellowSliderLabel.setBounds(30, position, 100, 40);
 	    this.setMajorTickSpacing(1);
 	    this.setPaintTicks(true);
 	    this.setBounds(130 + 100, position, 500, 40);
 	    this.addChangeListener(e -> {
-	    	JSlider source = (JSlider)e.getSource();
-	    	if (!source.getValueIsAdjusting()) {
-	    		value.setValue(Integer.valueOf(source.getValue()));
-	        }
+	    	Integer v = this.getValue();
+	    	System.out.println(v);
+	    	this.value.setValue(v);
 	    });
 	}
 	
