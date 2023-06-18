@@ -18,8 +18,8 @@ import traverse.FileDataDto;
 import traverse.FileTraverse;
 import traverse.TableDataDto;
 import view.FilePath;
-import view.Table;
-import view.TableCellRenderer;
+import view.table.Table;
+import view.table.TableCellRenderer;
 
 public class SearchButton extends Button {
 	
