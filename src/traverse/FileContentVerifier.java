@@ -42,7 +42,7 @@ public class FileContentVerifier {
 
     private void scanFile(FileType fileType) throws IOException {
         switch (fileType) {
-            case TEXT, CSV -> scanTextFile();
+            case TEXT, CSV, HTM, HTML -> scanTextFile();
             case PDF -> scanPdfFile();
             case XLSX -> scanXlsxFile();
             case DOCX -> scanDocxFile();
